@@ -53,9 +53,7 @@ def profile(request, username):
     template = 'posts/profile.html'
     following = (
             (request.user).is_authenticated
-            and Follow.objects.filter(
-                user=request.user, author=author
-            ).exists()
+            and author.following.exists()
     )
     context = {
         'posts': posts,
