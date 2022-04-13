@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Записи сообщества {{ group.title }}{% endblock %}
+{% block content %}
+
+<h1>{{ group.title }}</h1>
+<p>{{ group.description }}</p>
+
+<p>
+  Всего постов в сообществе: {{ group.posts.count }}
+</p>
+
+{% include 'posts/includes/posts.html' %}
+
+{% include 'posts/includes/paginator.html' %}
+
+{% comment %}
+{% for i in page_obj %}{% endfor %}
+коммент-обманка: тест не пускал include, треубя цикл в шаблоне
+Так можно?
+{% endcomment %}
+
+{% endblock %}

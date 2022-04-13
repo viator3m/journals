@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}
+Избранные авторы
+{% endblock %}
+{% block content %}
+
+<h1>Мои подписки</h1>
+
+{% if empty %}
+  <p>
+    У вас пока нет подписок.
+    Перейдите на <a href="{% url 'posts:index' %}">главную</a>
+  </p>
+
+{% else %}
+
+  {% include 'posts/includes/switcher.html' %}
+
+  {% include 'posts/includes/posts.html' %}
+
+  {% include 'posts/includes/paginator.html' %}
+
+{% endif %}
+
+{% endblock %}
