@@ -52,7 +52,12 @@ def profile(request, username):
     page_obj = paginate(request, posts)
     template = 'posts/profile.html'
     user = request.user
-    following = (user.is_authenticated and author.following.exists())
+    following = (
+            user.is_authenticated
+            and Follow.objects.filter(
+                user=user,
+                author=author
+            ).exists())
     context = {
         'posts': posts,
         'author': author,
