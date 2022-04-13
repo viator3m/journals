@@ -15,4 +15,3 @@ class TemplateTest(TestCase):
         response = self.client.get(url)
 
         self.assertTemplateUsed(response, template)
-
