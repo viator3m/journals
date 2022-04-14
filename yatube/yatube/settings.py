@@ -25,6 +25,8 @@ SECRET_KEY = 'lv@70e!9*r2y#oar##=kk8!pyx_6(3ge@5_ha0xy)z8si9p*fg'
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    'www.viator3m.pythonanywhere.com',
+    'viator3m.pythonanywhere.com',
     'localhost',
     '127.0.0.1',
     '[::1]',
