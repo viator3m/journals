@@ -221,7 +221,7 @@ class PostCreatingTest(PostViewsBaseTest):
     def test_creating_post_is_not_other_group(self):
         """Проверка, что пост не появился в другой группе"""
 
-        url = '/group/test-slug-2/'
+        url = reverse('posts:group_list', args=[self.group.slug])
 
         response = self.authorized_client.get(url)
         context = response.context['page_obj']

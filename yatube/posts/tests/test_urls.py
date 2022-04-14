@@ -53,9 +53,9 @@ class PostURLsGuestTests(PostUrlBaseTest):
 
         pages_list = (
             reverse('posts:index'),
-            reverse('posts:group_list', args=['test-slug']),
-            reverse('posts:profile', args=['auth']),
-            reverse('posts:post_detail', args=['1'])
+            reverse('posts:group_list', args=[self.group.slug]),
+            reverse('posts:profile', args=[self.user]),
+            reverse('posts:post_detail', args=[self.post.id])
         )
 
         for url in pages_list:
@@ -121,8 +121,8 @@ class PostURLsAuthTest(PostUrlBaseTest):
         """Проверяет, что авторизованный пользователь будет перенаправлен
          на страницу с постом, если он не автор поста."""
 
-        url = reverse('posts:post_edit', args=['1'])
-        expected_redirect = reverse('posts:post_detail', args=['1'])
+        url = reverse('posts:post_edit', args=[self.post.id])
+        expected_redirect = reverse('posts:post_detail', args=[self.post.id])
 
         response = self.authorized_client.get(url, follow=True)
 
@@ -132,7 +132,7 @@ class PostURLsAuthTest(PostUrlBaseTest):
         """Проверяет, что автору поста доступна страница
          с редактированием поста."""
 
-        url = reverse('posts:post_edit', args=['1'])
+        url = reverse('posts:post_edit', args=[self.post.id])
 
         response = self.author.get(url)
 
@@ -148,9 +148,9 @@ class PostURLsAuthTest(PostUrlBaseTest):
                 'posts/group_list.html',
             reverse('posts:profile', args=['auth']):
                 'posts/profile.html',
-            reverse('posts:post_detail', args=['1']):
+            reverse('posts:post_detail', args=[self.post.id]):
                 'posts/post_detail.html',
-            reverse('posts:post_edit', args=['1']):
+            reverse('posts:post_edit', args=[self.post.id]):
                 'posts/create_post.html',
             reverse('posts:post_create'):
                 'posts/create_post.html',
@@ -159,6 +159,6 @@ class PostURLsAuthTest(PostUrlBaseTest):
         for url, template in templates_names.items():
             with self.subTest(url=url):
                 response = self.authorized_client.get(url)
-                if url == '/posts/1/edit/':
+                if url == reverse('posts:post_edit', args=[self.post.id]):
                     response = self.author.get(url)
                 self.assertTemplateUsed(response, template)

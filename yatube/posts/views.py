@@ -138,8 +138,7 @@ def add_comment(request, post_id):
 
 @login_required
 def follow_index(request):
-    authors = request.user.follower.values_list('author')
-    posts = Post.objects.filter(author_id__in=authors)
+    posts = Post.objects.filter(author__following__user=request.user)
     page_obj = paginate(request, posts)
     template = 'posts/follow.html'
     context = {
@@ -153,12 +152,13 @@ def follow_index(request):
 @login_required
 def profile_follow(request, username):
     author = get_object_or_404(User, username=username)
-    following = Follow.objects.filter(
-        user=request.user, author=author
-    ).exists()
     url = reverse('posts:profile', args=(username,))
-    if not following and request.user != author:
-        Follow.objects.create(user=request.user, author=author)
+
+    if request.user != author:
+        Follow.objects.filter(user=request.user, author=author).get_or_create(
+            user=request.user, author=author
+        )
+
     return redirect(url)
 
 
