@@ -155,9 +155,7 @@ def profile_follow(request, username):
     url = reverse('posts:profile', args=(username,))
 
     if request.user != author:
-        Follow.objects.filter(user=request.user, author=author).get_or_create(
-            user=request.user, author=author
-        )
+        Follow.objects.get_or_create(user=request.user, author=author)
 
     return redirect(url)
 
