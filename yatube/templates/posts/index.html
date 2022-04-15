@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load cache %}
+
 {% block title %}
 Последние обновления на сайте
 {% endblock %}
@@ -9,9 +10,12 @@
 
 {% include 'posts/includes/switcher.html' %}
 
-{% cache 20 index_page %}
-{% include 'posts/includes/posts.html' %}
-{% endcache %}
+  {% cache 20 index_page %}
+    {% for post in page_obj %}
+      {% include 'posts/includes/post.html' %}
+    {% endfor %}
+  {% endcache %}
+
 
 {% include 'posts/includes/paginator.html' %}
 
