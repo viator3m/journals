@@ -16,7 +16,10 @@
 
   {% include 'posts/includes/switcher.html' %}
 
-  {% include 'posts/includes/posts.html' %}
+
+  {% for post in page_obj %}
+    {% include 'posts/includes/post.html' %}
+  {% endfor %}
 
   {% include 'posts/includes/paginator.html' %}
 

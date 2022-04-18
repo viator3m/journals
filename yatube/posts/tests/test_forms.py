@@ -13,6 +13,7 @@ User = get_user_model()
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
 
+@override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class FormTest(TestCase):
     """Базовый класс для создания фикстур."""
 
@@ -51,7 +52,6 @@ class FormTest(TestCase):
         shutil.rmtree(TEMP_MEDIA_ROOT, ignore_errors=True)
 
 
-@override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class PostFormTest(FormTest):
     """Тестирование форм создания и редактирования поста """
 

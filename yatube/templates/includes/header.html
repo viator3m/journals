@@ -1,4 +1,7 @@
 {% load static %}
+{% load cache %}
+
+{% cache 600 header %}
 <header>
   {% with request.resolver_match.view_name as view_name %}
   <nav class="navbar navbar-light" style="background-color: lightskyblue">
@@ -69,3 +72,4 @@
       {% endif %}
   {% endwith %}
 </header>
+{% endcache %}

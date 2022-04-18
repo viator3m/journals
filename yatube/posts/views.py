@@ -6,6 +6,7 @@ from django.shortcuts import (
     get_object_or_404,
 )
 from django.urls import reverse
+from django.views.decorators.cache import cache_page
 
 from .forms import PostForm, CommentForm
 from .models import Group, Post, User, Follow
@@ -20,13 +21,13 @@ def paginate(request, element):
     return page_obj
 
 
+@cache_page(20, key_prefix='index_page')
 def index(request):
     template = 'posts/index.html'
     posts = Post.objects.all()
     page_obj = paginate(request, posts)
     groups = Group.objects.all()
     context = {
-        'posts': posts,
         'groups': groups,
         'page_obj': page_obj,
     }
@@ -40,7 +41,6 @@ def group_posts(request, slug):
     page_obj = paginate(request, posts)
     context = {
         'group': group,
-        'posts': posts,
         'page_obj': page_obj,
     }
     return render(request, template, context)
@@ -61,7 +61,6 @@ def profile(request, username):
         ).exists()
 
     context = {
-        'posts': posts,
         'author': author,
         'page_obj': page_obj,
         'following': following,

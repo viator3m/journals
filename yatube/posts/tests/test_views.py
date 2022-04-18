@@ -132,6 +132,7 @@ class PostContextTest(PostViewsBaseTest):
 
         for url in urls:
             with self.subTest(url=url):
+                cache.clear()
                 response = self.authorized_client.get(url)
                 context = response.context['page_obj']
                 obj = context[0]
@@ -158,6 +159,7 @@ class PaginatorViewTest(PostViewsBaseTest):
     def test_first_page_contains_ten_records(self):
         """Проверяет, что на первой странице index будет 10 постов"""
 
+        cache.clear()
         response = self.client.get(reverse('posts:index'))
         expected_numbers = NUMBER_OF_POSTS
 
@@ -201,6 +203,7 @@ class PostTemplatesTest(PostViewsBaseTest):
 
         for name, template in templates_name.items():
             with self.subTest(template=template):
+                cache.clear()
                 response = self.authorized_client.get(name)
                 if name == f'/posts/{post_id}/edit/':
                     response = self.author.get(name)
@@ -299,6 +302,7 @@ class SubscribeTest(PostViewsBaseTest):
     def test_new_post_if_subscribe(self):
         """Проверяет, что новый пост появляется в ленте подписчиков."""
 
+        cache.clear()
         Follow.objects.create(user=self.user_noname, author=self.user)
         url = reverse('posts:follow_index')
 
