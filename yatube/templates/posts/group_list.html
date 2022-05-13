@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% load cache %}
 {% block title %}Записи сообщества {{ group.title }}{% endblock %}
 {% block content %}
 
@@ -10,11 +9,9 @@
   Всего постов в сообществе: {{ group.posts.count }}
 </p>
 
-  {% cache 20 index_page %}
-    {% for post in page_obj %}
-      {% include 'posts/includes/post.html' %}
-    {% endfor %}
-  {% endcache %}
+  {% for post in page_obj %}
+    {% include 'posts/includes/post.html' %}
+  {% endfor %}
 
 {% include 'posts/includes/paginator.html' %}
 

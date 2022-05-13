@@ -21,7 +21,6 @@ def paginate(request, element):
     return page_obj
 
 
-@cache_page(20, key_prefix='index_page')
 def index(request):
     template = 'posts/index.html'
     posts = Post.objects.all()
