@@ -24,22 +24,22 @@
       {{ post.text|truncatechars:300 }}
     </div>
 
-    <div class="card-footer row justify-content-between">
-      <div class="col-6">
+    <div class="card-footer row-cols-auto justify-content-between">
+      <div class="col-6" style="float: left">
         <a href="{% url 'posts:post_detail' post.id %}"
-           class="btn btn-primary">
+           class="btn btn-outline-primary btn-sm">
           читать дальше</a>
         {% if not request.resolver_match.view_name == 'posts:group_list' %}
           {% if post.group %}
             <a href="{% url 'posts:group_list' post.group.slug %}"
-               class="btn btn-primary">
+               class="btn btn-outline-primary btn-sm">
               Группа {{ post.group.title }}</a>
           {% endif %}
         {% endif %}
       </div>
 
       {% if not request.resolver_match.view_name == 'posts:post_detail' %}
-        <div class="col-12 text-end">
+        <div class="col-12 text-end" >
           <a href="{% url 'posts:post_detail' post.id %}#comment"
              class="text-black" style="text-decoration: None">
             <img src="{% static 'img/comment.png' %}" width="25" height="25"
