@@ -40,7 +40,7 @@
 
       {% if not request.resolver_match.view_name == 'posts:post_detail' %}
         <div class="col-12 text-end">
-          <a href="{% url 'posts:post_detail' post.id %}"
+          <a href="{% url 'posts:post_detail' post.id %}#comment"
              class="text-black" style="text-decoration: None">
             <img src="{% static 'img/comment.png' %}" width="25" height="25"
                  class="d-inline-block" alt="">
