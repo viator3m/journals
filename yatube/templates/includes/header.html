@@ -65,9 +65,9 @@
     <li>
     {% if request.user.is_authenticated %}
       <div class="container d-flex justify-content-end">
-        <div class="card">
-          <div class="card-header">
-            Пользователь: <a href="{% url 'posts:profile' user.username %}">{{ user.username }}</a>
+        <div class="card" style="background-color: #414a4c">
+          <div class="card-header" style="color: white">
+            Пользователь: <a href="{% url 'posts:profile' user.username %}" style="color: white">{{ user.username }}</a>
           </div>
         </div>
       </div>
