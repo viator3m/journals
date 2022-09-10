@@ -42,3 +42,5 @@ python manage.py runserver
 python manage.py createsuperuser
 ```
 - перейти по адресу `localhost:8000/admin/`
+
+Ознакомится с работающим проектом можно по [ссылке](http://viator3m.pythonanywhere.com/)
