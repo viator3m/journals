@@ -6,7 +6,6 @@ from django.shortcuts import (
     get_object_or_404,
 )
 from django.urls import reverse
-from django.views.decorators.cache import cache_page
 
 from .forms import PostForm, CommentForm
 from .models import Group, Post, User, Follow
