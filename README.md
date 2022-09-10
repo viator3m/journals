@@ -16,7 +16,7 @@
 
 - клонировать репозиторий
 ```
-git clone https://github.com/viator3m/journals
+git clone git@github.com:viator3m/journals.git
 ```
 - в директории с проектом создать виртуальное окружение
 ```
